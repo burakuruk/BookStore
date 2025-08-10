@@ -13,7 +13,7 @@ dotnet dev-certs https --trust
 
 2) API (https):
 dotnet run --project ./BookStore.Api/BookStore.Api.csproj --launch-profile https
-# Swagger: https://localhost:5001/swagger
+Swagger: https://localhost:5001/swagger
 
 3) Web (https):
 dotnet run --project ./BookStore.Web/BookStore.Web.csproj --launch-profile https
