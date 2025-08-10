@@ -16,8 +16,5 @@ BookStore.Web/bookstore_web.db*
 # Logs
 *.log
 
-# Generated
-BookStore.Api/wwwroot/images/*
-!BookStore.Api/wwwroot/images/.gitkeep
 
 
