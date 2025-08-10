@@ -1,0 +1,40 @@
+@{
+    ViewData["Title"] = "Yönetim Paneli";
+}
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="mb-0">Yönetim Paneli</h2>
+        <div class="d-none d-md-flex gap-3">
+            <div class="admin-stat">
+                <div class="text-muted small">Kategoriler</div>
+                <div class="fw-semibold">—</div>
+            </div>
+            <div class="admin-stat">
+                <div class="text-muted small">Kitaplar</div>
+                <div class="fw-semibold">—</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="list-group">
+        <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" asp-area="Admin" asp-controller="Categories" asp-action="Index">
+            <span><i class="bi bi-tags me-2"></i>Kategoriler</span>
+            <i class="bi bi-chevron-right"></i>
+        </a>
+        <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" asp-area="Admin" asp-controller="Books" asp-action="Index">
+            <span><i class="bi bi-journal-text me-2"></i>Kitaplar</span>
+            <i class="bi bi-chevron-right"></i>
+        </a>
+        <a class="list-group-item list-group-item-action disabled d-flex justify-content-between align-items-center">
+            <span><i class="bi bi-people me-2"></i>Kullanıcılar (yakında)</span>
+        </a>
+        <a class="list-group-item list-group-item-action disabled d-flex justify-content-between align-items-center">
+            <span><i class="bi bi-receipt me-2"></i>Siparişler (yakında)</span>
+        </a>
+        <a class="list-group-item list-group-item-action disabled d-flex justify-content-between align-items-center">
+            <span><i class="bi bi-heart me-2"></i>Favoriler (yakında)</span>
+        </a>
+    </div>
+</div>
+
+

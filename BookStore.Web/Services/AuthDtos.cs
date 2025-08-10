@@ -1,0 +1,3 @@
+namespace BookStore.Web.Services { }
+
+

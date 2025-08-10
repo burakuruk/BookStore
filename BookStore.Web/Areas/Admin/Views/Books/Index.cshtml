@@ -1,0 +1,45 @@
+@using BookStore.Web.Services
+@model List<BookDto>
+@{
+    ViewData["Title"] = "Kitaplar";
+    var categories = ViewBag.Categories as List<CategoryDto> ?? new();
+}
+<div class="container-fluid py-2">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Kitaplar</h2>
+        <a class="btn btn-primary" asp-area="Admin" asp-controller="Books" asp-action="Create">Yeni Kitap</a>
+    </div>
+
+    <div class="mb-3 d-flex gap-2">
+        <a class="btn btn-sm btn-outline-secondary" asp-action="Index">Tümü</a>
+        @foreach (var c in categories)
+        {
+            <a class="btn btn-sm btn-outline-primary" asp-area="Admin" asp-controller="Books" asp-action="Index" asp-route-categoryId="@c.Id">@c.Name</a>
+        }
+    </div>
+
+    <table class="table table-dark table-hover align-middle">
+        <thead><tr><th>ID</th><th>Görsel</th><th>Kitap</th><th>Kategori</th><th>Fiyat</th><th></th></tr></thead>
+        <tbody>
+        @foreach (var b in Model)
+        {
+            <tr>
+                <td>@b.Id</td>
+                <td><img src="@(string.IsNullOrWhiteSpace(b.ImageUrl)?"https://picsum.photos/80/60":b.ImageUrl)" width="80" class="rounded"/></td>
+                <td>@b.Title<br /><small class="text-muted">@b.Author</small></td>
+                <td>@b.Category?.Name</td>
+                <td>@b.Price.ToString("C")</td>
+                <td class="text-end">
+                    <a class="btn btn-sm btn-outline-secondary" asp-area="Admin" asp-controller="Books" asp-action="Edit" asp-route-id="@b.Id">Düzenle</a>
+                    <form asp-area="Admin" asp-controller="Books" asp-action="Delete" method="post" class="d-inline">
+                        <input type="hidden" name="id" value="@b.Id" />
+                        <button class="btn btn-sm btn-outline-danger" onclick="return confirm('Silinsin mi?');">Sil</button>
+                    </form>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+
+

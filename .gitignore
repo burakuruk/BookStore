@@ -1,0 +1,23 @@
+# Build outputs
+bin/
+obj/
+**/bin/
+**/obj/
+
+# VS/IDE
+.vs/
+*.user
+*.suo
+
+# SQLite local db
+BookStore.Api/bookstore.db*
+BookStore.Web/bookstore_web.db*
+
+# Logs
+*.log
+
+# Generated
+BookStore.Api/wwwroot/images/*
+!BookStore.Api/wwwroot/images/.gitkeep
+
+

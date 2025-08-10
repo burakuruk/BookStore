@@ -1,0 +1,77 @@
+﻿@{
+    ViewData["Title"] = "Anasayfa";
+}
+<section class="hero" data-aos="fade-up">
+    <div class="container-xxl">
+        <div class="row align-items-center">
+            <div class="col-lg-7">
+                <h1 class="display-5 mb-3">Modern ve Estetik Kitap Dünyası</h1>
+                <p class="lead mb-4">Binlerce kitabı premium bir deneyimle keşfedin. Kategorilere göz atın, favorilerinize ekleyin ve kolayca sipariş verin.</p>
+                <a class="btn btn-lg btn-primary me-2" asp-controller="Store" asp-action="Index"><i class="bi bi-bag me-2"></i>Alışverişe Başla</a>
+                <a class="btn btn-lg btn-soft" asp-controller="Store" asp-action="Index">Popüler Kitaplar</a>
+            </div>
+            <div class="col-lg-5 text-center" id="heroLottie" style="height:280px"></div>
+        </div>
+    </div>
+ </section>
+<section class="py-5" data-aos="fade-up" data-aos-delay="150">
+  <div class="container-xxl">
+    <div class="row g-4">
+      <div class="col-12 col-md-4">
+        <div class="card h-100 p-3 card-metric">
+          <div>
+            <h5 class="mb-1">Hızlı Teslimat</h5>
+            <div class="text-muted">24 saatte kargoda</div>
+          </div>
+          <i class="bi bi-truck" style="font-size:2rem;color:var(--brand-2)"></i>
+        </div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="card h-100 p-3 card-metric">
+          <div>
+            <h5 class="mb-1">Güvenli Ödeme</h5>
+            <div class="text-muted">256-bit SSL</div>
+          </div>
+          <i class="bi bi-shield-lock" style="font-size:2rem;color:var(--brand)"></i>
+        </div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="card h-100 p-3 card-metric">
+          <div>
+            <h5 class="mb-1">Geniş Arşiv</h5>
+            <div class="text-muted">10k+ kitap</div>
+          </div>
+          <i class="bi bi-collection" style="font-size:2rem;color:var(--brand)"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+@section Scripts{
+<script>
+  (async ()=>{
+    const container = document.getElementById('heroLottie');
+    if(!window.lottie || !container) return;
+    const sources = [
+      'https://assets3.lottiefiles.com/packages/lf20_5w3qfg7y.json',
+      'https://assets6.lottiefiles.com/packages/lf20_8wRE0Z.json',
+      'https://assets10.lottiefiles.com/packages/lf20_y2hxPc.json'
+    ];
+    let loaded = false;
+    for (const url of sources){
+      try{
+        const res = await fetch(url, {mode:'cors'});
+        if(!res.ok) continue;
+        const data = await res.json();
+        lottie.loadAnimation({ container, renderer:'svg', loop:true, autoplay:true, animationData:data });
+        loaded = true; break;
+      }catch{ /* next source */ }
+    }
+    if(!loaded){
+      // graceful fallback SVG icon
+      container.innerHTML = '<svg width="220" height="220" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g><path d="M4 5.5C4 4.12 5.12 3 6.5 3H12v16H6.5A2.5 2.5 0 0 0 4 21.5V5.5Z" fill="#fff" stroke="#C0A060" stroke-width="1.4"/><path d="M20 5.5C20 4.12 18.88 3 17.5 3H12v16h5.5A2.5 2.5 0 0 1 20 21.5V5.5Z" fill="#fff" stroke="#C0A060" stroke-width="1.4"/></g></svg>';
+    }
+  })();
+</script>
+}

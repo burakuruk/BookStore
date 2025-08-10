@@ -1,0 +1,12 @@
+@model BookStore.Web.ViewComponents.NavCountsVM
+<a class="btn btn-outline-gold d-flex align-items-center gap-2 position-relative" asp-controller="Favorites" asp-action="Index">
+    <i class="bi bi-heart"></i>
+    <span>Favoriler</span>
+    <span data-badge-fav class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger @(Model.FavoritesCount>0?"":"d-none")">@(Model.FavoritesCount>0?Model.FavoritesCount.ToString():"")</span>
+  </a>
+<a class="btn btn-outline-gold d-flex align-items-center gap-2 position-relative" asp-controller="Cart" asp-action="Index">
+    <i class="bi bi-bag"></i>
+    <span>Sepet</span>
+    <span data-badge-cart class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success @(Model.CartCount>0?"":"d-none")" style="transform: translate(-10%, -40%);">@(Model.CartCount>0?Model.CartCount.ToString():"")</span>
+  </a>
+

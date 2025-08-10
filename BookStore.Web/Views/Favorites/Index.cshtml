@@ -1,0 +1,41 @@
+@using BookStore.Web.Services
+@model List<FavoriteDto>
+@{
+    ViewData["Title"] = "Favorilerim";
+}
+<div class="container py-4">
+    <h2>Favorilerim</h2>
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">Henüz favoriniz yok.</div>
+    }
+    else
+    {
+        <div class="row row-cols-1 row-cols-md-3 g-3">
+            @foreach (var f in Model)
+            {
+                <div class="col">
+                    <div class="card h-100">
+                        <img class="card-img-top" src="@(string.IsNullOrWhiteSpace(f.Book?.ImageUrl)?"https://picsum.photos/600/400":f.Book!.ImageUrl)" alt="@f.Book?.Title" loading="lazy" style="object-fit:cover;height:200px"/>
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">@f.Book?.Title</h5>
+                            <div class="mt-auto d-flex justify-content-between align-items-center gap-2">
+                                <span class="fw-bold">@f.Book?.Price.ToString("C")</span>
+                                <div class="d-flex gap-2">
+                                <button class="btn btn-sm btn-primary" data-add-cart data-id="@f.BookId" data-title="@f.Book?.Title" data-price="@f.Book?.Price"><i class="bi bi-bag me-1"></i>Sepete Ekle</button>
+                                <form asp-action="Delete" method="post" class="d-inline">
+                                    <input type="hidden" name="id" value="@f.Id" />
+                                    <input type="hidden" name="bookId" value="@f.BookId" />
+                                    <button class="btn btn-sm btn-outline-danger">Kaldır</button>
+                                </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+

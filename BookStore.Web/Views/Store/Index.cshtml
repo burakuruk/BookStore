@@ -1,0 +1,54 @@
+@using BookStore.Web.Services
+@model List<BookDto>
+@{
+    ViewData["Title"] = "Kitaplar";
+    var categories = ViewBag.Categories as List<CategoryDto> ?? new();
+}
+
+<div class="container py-5">
+    <div class="row mb-5">
+        <div class="col-12 d-flex gap-2 flex-wrap category-filter">
+            <a asp-action="Index" class="btn btn-sm btn-outline-secondary">Tümü</a>
+            @foreach (var c in categories)
+            {
+                <a asp-action="Index" asp-route-categoryId="@c.Id" class="btn btn-sm btn-outline-primary">@c.Name</a>
+            }
+        </div>
+    </div>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-5">
+        @foreach (var b in Model)
+        {
+            <div class="col">
+                <div class="card h-100 shadow-sm overflow-hidden">
+                    <div class="ratio ratio-16x9 skeleton">
+                        <img class="card-img-top" loading="lazy" src="@(string.IsNullOrWhiteSpace(b.ImageUrl) ? "https://picsum.photos/seed/"+b.Id+"/600/400" : b.ImageUrl)" alt="@b.Title" style="object-fit:cover">
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <h5 class="card-title mb-0">@b.Title</h5>
+                            <span class="badge badge-soft text-uppercase" style="letter-spacing:.3px">@b.Category?.Name</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <p class="card-text text-muted mb-0">@b.Author</p>
+                            <a class="link-underline small" asp-action="Book" asp-route-id="@b.Id">Detay</a>
+                        </div>
+                        <div class="mt-auto">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="fw-bold text-primary fs-5">@b.Price.ToString("C")</span>
+                            </div>
+                            <div class="card-actions d-flex flex-wrap gap-2 justify-content-end">
+                                <button class="btn btn-sm btn-outline-gold action-btn" data-add-fav data-book-id="@b.Id"><i class="bi bi-heart me-1"></i>Favori</button>
+                                <button class="btn btn-sm btn-primary action-btn" data-add-cart data-id="@b.Id" data-title="@b.Title" data-price="@b.Price"><i class="bi bi-bag me-1"></i>Sepete Ekle</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    @if (TempData["CartMessage"] is string msg)
+    {
+        <div class="alert alert-success mt-4">@msg</div>
+    }
+}
+
